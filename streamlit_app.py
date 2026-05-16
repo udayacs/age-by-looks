@@ -5,6 +5,7 @@ from torch.utils.data import Dataset, DataLoader, WeightedRandomSampler
 from torchvision import transforms
 from PIL import Image
 import numpy as np
+#from pathlib import Path
 
 IMG_SIZE = 224
 MODEL = None
@@ -13,6 +14,8 @@ AGE_LABELS = [
     "0-2", "3-9", "10-19", "20-29", "30-39",
     "40-49", "50-59", "60-69", "more than 70"
     ]
+
+#script_dir = Path(__file__).resolve().parent
 
 class SimpleCNN(nn.Module):
     def __init__(self, num_classes):
@@ -85,7 +88,7 @@ if "my_variable" not in st.session_state:
     initialize()
 
 # --- APP CODE ---
-st.image("/workspaces/age-by-looks/mask.jpg", width=100)
+st.image("mask.jpg", width=100)
 st.title("Age By Looks")
 st.write(
     " Please upload a photo of yourself, and we will guess your age."
@@ -97,7 +100,7 @@ if uploaded_file is not None:
     # Here you would add the code to process the image and predict the age
     # For demonstration purposes, we'll just display a placeholder result
     predicted_age = predict_age(uploaded_file)
-    st.write(f"We guess your age is: **{AGE_LABELS[predicted_age]}**")
+    st.write(f"We guess your age is in: **{AGE_LABELS[predicted_age]}**")
     st.write("Thank you for using the Age By Looks app!")
 else:
     st.write("Please upload a photo to get started.")
